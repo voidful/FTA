@@ -1,0 +1,6 @@
+tulipy
+numpy
+pandas
+pandas-ta
+vectorbt
+python-binance
