@@ -9,7 +9,7 @@ Technical Analysis on Cryptocurrency
 ## usage
 
 ```python
-import cta
+import cryptota
 import vectorbt as vbt
 
 binance_data = vbt.BinanceData.download(
