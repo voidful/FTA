@@ -21,7 +21,7 @@ binance_data = vbt.BinanceData.download(
 binance_data = binance_data.update()
 price = binance_data.get()
 
-ta = cta.TA_Features()
+ta = cryptota.TA_Features()
 ta.get_all_indicators(price)
 ```
 
