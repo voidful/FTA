@@ -122,7 +122,7 @@ class TA_Features:
         'wma': wma, 'zlema': zlema
     }
 
-    def _remove_duplicate_columns(cls, df: pd.DataFrame):
+    def _remove_duplicate_columns(self, df: pd.DataFrame):
         """Rename all duplicate columns appending _2 or _3 or _4 etc"""
         cols = pd.Series(df.columns)
         for dup in cols[cols.duplicated()].unique():
@@ -139,7 +139,7 @@ class TA_Features:
             orig[new.name.lower()] = new
         return orig
 
-    def get_all_pandas_ta_indicators(cls, data=None, unique=False, **kwargs):
+    def get_all_pandas_ta_indicators(self, data=None, unique=False, **kwargs):
         """
             Get all Pandas_TA indicators
             :param: data - DataFrame with columns: 'open' 'high' 'low' 'close' 'volume'
@@ -151,7 +151,7 @@ class TA_Features:
         close = data['close']
         volume = data['volume']
 
-        ind = cls.unique_pandas_ta_indicators if unique else cls.pandas_ta_indicators
+        ind = self.unique_pandas_ta_indicators if unique else self.pandas_ta_indicators
 
         for name, function in ind.items():
             if name == 'massi':  # Can't handle being sent a close= kwarg
@@ -165,31 +165,32 @@ class TA_Features:
                                           volume=volume)
             if type(indicator_data) == tuple:  # tuple of dataframes
                 for i in range(0, len(indicator_data)):
-                    data = cls._append_column(data, indicator_data[i])
+                    data = self._append_column(data, indicator_data[i])
             else:
-                data = cls._append_column(data, indicator_data)
-        return cls._remove_duplicate_columns(data)
+                data = self._append_column(data, indicator_data)
+        return self._remove_duplicate_columns(data)
 
-    @classmethod
-    def get_all_pantulipy_indicators(cls, data=None, unique=False, **kwargs):
+    def get_all_pantulipy_indicators(self, data=None, unique=False, **kwargs):
         """
             Get all Tulip Indicators
             :param: data - DataFrame with columns: 'open' 'high' 'low' 'close' 'volume'
             :param: unique - True would exclude all indicators that Pandas_TA has also
         """
-        ind = cls.unique_pantulipy_indicators if unique else cls.pantulipy_indicators
+        ind = self.unique_pantulipy_indicators if unique else self.pantulipy_indicators
         for name, function in ind.items():
             if name not in _DEFAULTLESS_INDICATORS:
                 data = pd.concat([data, function(data)], axis=1)
-        return cls._remove_duplicate_columns(data)
+        return self._remove_duplicate_columns(data)
 
-    @classmethod
-    def get_all_indicators(cls, data=None, **kwargs):
+    def get_all_indicators(self, data=None, **kwargs):
         """
             Get all Tulipy and Pandas_TA indicators
             :param: data = DataFrame with columns: 'open' 'high' 'low' 'close' 'volume'
         """
-        data.columns = map(str.lower, data.columns)
-        data = cls.get_all_pandas_ta_indicators(data, unique=True)
-        data = cls.get_all_pantulipy_indicators(data, unique=False)
+        if len(data) > 500:
+            data.columns = map(str.lower, data.columns)
+            data = self.get_all_pandas_ta_indicators(data, unique=True)
+            data = self.get_all_pantulipy_indicators(data, unique=False)
+        else:
+            print("Num of data should larger then 500.")
         return data

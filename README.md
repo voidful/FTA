@@ -16,7 +16,7 @@ binance_data = vbt.BinanceData.download(
     "BTCUSDT",
     start='1 day ago UTC',
     end='now UTC',
-    interval='15m'
+    interval='1m'
 )
 binance_data = binance_data.update()
 price = binance_data.get()
