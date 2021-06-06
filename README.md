@@ -4,7 +4,7 @@ Technical Analysis on Cryptocurrency
 
 ## install
 
-`pip install cta`
+`pip install cryptota`
 
 ## usage
 

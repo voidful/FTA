@@ -4,7 +4,7 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(
-    name='cta',
+    name='cryptota',
     version='0.0.2',
     description='',
     url='https://github.com/voidful/CryptoTA',
