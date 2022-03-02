@@ -1,4 +1,4 @@
-~~# CryptoTA
+# CryptoTA
 
 Technical Analysis on Cryptocurrency
 
