@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='cryptota',
-    version='0.0.4',
+    version='0.0.5',
     description='',
     url='https://github.com/voidful/CryptoTA',
     author='Voidful',

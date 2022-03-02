@@ -6,5 +6,5 @@ pandas-ta
 vectorbt
 python-binance
 alpaca-trade-api
-ccxt
+ccxt>=1.74.63
 yfinance
