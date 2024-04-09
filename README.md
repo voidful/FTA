@@ -1,4 +1,4 @@
-# CryptoTA
+# FTA
 
 Technical Analysis On Finance Data
 
