@@ -74,21 +74,19 @@ class TA_Features:
         'coppock': ta.coppock, 'decreasing': ta.decreasing, 'dema': ta.dema,
         'donchian': ta.donchian, 'dpo': ta.dpo, 'efi': ta.efi, 'ema': ta.ema,
         'eom': ta.eom, 'fisher': ta.fisher, 'fwma': ta.fwma, 'hma': ta.hma,
-        'ichimoku': ta.ichimoku, 'increasing': ta.increasing, 'kama': ta.kama,
+        'increasing': ta.increasing, 'kama': ta.kama,
         'kc': ta.kc, 'kst': ta.kst, 'kurtosis': ta.kurtosis,
-        'linear_decay': ta.decay, 'log_return': ta.log_return,
-        'macd': ta.macd, 'mad': ta.mad, 'massi': ta.massi, 'median': ta.median,
-        'mfi': ta.mfi, 'midpoint': ta.midpoint, 'midprice': ta.midprice,
-        'mom': ta.mom, 'natr': ta.natr, 'nvi': ta.nvi, 'obv': ta.obv,
-        'percent_return': ta.percent_return, 'ppo': ta.ppo, 'pvi': ta.pvi,
+        'log_return': ta.log_return, 'mad': ta.mad, 'massi': ta.massi, 'median': ta.median,
+        'midpoint': ta.midpoint, 'midprice': ta.midprice,
+        'mom': ta.mom, 'natr': ta.natr,  'obv': ta.obv, 'ppo': ta.ppo,
         'pvol': ta.pvol, 'pvt': ta.pvt, 'pwma': ta.pwma, 'qstick': ta.qstick,
         'quantile': ta.quantile, 'rma': ta.rma, 'roc': ta.roc, 'rsi': ta.rsi,
         'rvi': ta.rvi, 'sinwma': ta.sinwma, 'skew': ta.skew, 'slope': ta.slope,
-        'sma': ta.sma, 'stdev': ta.stdev, 'stoch': ta.stoch, 'swma': ta.swma,
+        'sma': ta.sma, 'stdev': ta.stdev,  'swma': ta.swma,
         't3': ta.t3, 'tema': ta.tema, 'trima': ta.trima, 'trix': ta.trix,
         'true_range': ta.true_range, 'tsi': ta.tsi, 'uo': ta.uo,
-        'variance': ta.variance, 'vortex': ta.vortex, 'vp': ta.vp,
-        'vwap': ta.vwap, 'vwma': ta.vwma, 'willr': ta.willr, 'wma': ta.wma,
+        'variance': ta.variance, 'vortex': ta.vortex,
+         'vwma': ta.vwma, 'willr': ta.willr, 'wma': ta.wma,
         'zlma': ta.zlma, 'zscore': ta.zscore
     }
     unique_pantulipy_indicators = {
@@ -133,10 +131,10 @@ class TA_Features:
 
     def _append_column(cls, orig, new):
         if isinstance(new, pd.DataFrame):
-            for n, column in enumerate(new.columns):
-                orig[column.lower()] = new.iloc[:, n]
+            new.columns = [c.lower() for c in new.columns]
+            orig = pd.concat([orig, new], axis=1)
         else:
-            orig[new.name.lower()] = new
+            orig = pd.concat([orig, new.rename(new.name.lower()).to_frame()], axis=1)
         return orig
 
     def get_all_pandas_ta_indicators(self, data=None, unique=False, **kwargs):
@@ -145,6 +143,12 @@ class TA_Features:
             :param: data - DataFrame with columns: 'open' 'high' 'low' 'close' 'volume'
             :param: unique - True would exclude all indicators that Tulip also has
         """
+        data.columns = map(str.lower, data.columns)
+        data['open'] = pd.to_numeric(data['open'], errors='coerce')
+        data['high'] = pd.to_numeric(data['high'], errors='coerce')
+        data['low'] = pd.to_numeric(data['low'], errors='coerce')
+        data['close'] = pd.to_numeric(data['close'], errors='coerce')
+        data['volume'] = pd.to_numeric(data['volume'], errors='coerce')
         open_ = data['open']
         high = data['high']
         low = data['low']

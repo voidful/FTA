@@ -4,10 +4,10 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(
-    name='cryptota',
-    version='0.0.5',
+    name='fta',
+    version='0.0.1',
     description='',
-    url='https://github.com/voidful/CryptoTA',
+    url='https://github.com/voidful/FTA',
     author='Voidful',
     author_email='voidful.stack@gmail.com',
     long_description=open("README.md", encoding="utf8").read(),
@@ -19,7 +19,7 @@ setup(
         "Programming Language :: Python"
     ],
     license="Apache",
-    keywords='Crypto',
+    keywords='finance',
     packages=find_packages(),
     install_requires=required,
     zip_safe=False,

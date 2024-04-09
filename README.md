@@ -1,27 +1,25 @@
 # CryptoTA
 
-Technical Analysis on Cryptocurrency
+Technical Analysis On Finance Data
 
 ## install
 
-`pip install cryptota`
+`pip install fta`
 
 ## example usage
 
 ```python
-import cryptota
+import fta
 import vectorbt as vbt
 
-binance_data = vbt.BinanceData.download(
-    "BTCUSDT",
-    start='1 day ago UTC',
-    end='now UTC',
+yf_data = vbt.YFData.download(
+    "TSLA",
+    start='2022-02-25 09:30:00 -0400',
+    end='2022-03-01 09:35:00 -0400',
     interval='1m'
 )
-binance_data = binance_data.update()
-price = binance_data.get()
-
-ta = cryptota.TA_Features()
+price = yf_data.get()
+ta = fta.TA_Features()
 ta.get_all_indicators(price)
 ```
 last 10 result:
@@ -40,30 +38,44 @@ last 10 result:
 
 ## Supported DataSource
 
+### Yfinance
+```
+yf_data = vbt.YFData.download(
+    "TSLA",
+    start='2022-02-25 09:30:00 -0400',
+    end='2022-03-01 09:35:00 -0400',
+    interval='1m'
+)
+price = yf_data.get()
+```
+
 ### Binance
+
 ```python
-import cryptota
+import fta
 import vectorbt as vbt
 
 binance_data = vbt.BinanceData.download(
-    "BTCUSDT",
-    start='1 day ago UTC',
-    end='now UTC',
-    interval='1m'
+  "BTCUSDT",
+  start='1 day ago UTC',
+  end='now UTC',
+  interval='1m'
 )
 binance_data = binance_data.update()
 price = binance_data.get()
 ```
 
 ### Alpaca
+
 ```python
-import cryptota
+import fta
 import vectorbt as vbt
+
 alpaca_data = vbt.AlpacaData.download(
-    "AAPL",
-    start='2 hours ago UTC',
-    end='15 minutes ago UTC',
-    interval='1m',
+  "AAPL",
+  start='2 hours ago UTC',
+  end='15 minutes ago UTC',
+  interval='1m',
 )
 alpaca_data = alpaca_data.update()
 price = alpaca_data.get()
@@ -82,16 +94,7 @@ ccxt_data = ccxt_data.update()
 price = ccxt_data.get()
 ```
 
-### Yfinance
-```
-yf_data = vbt.YFData.download(
-    "TSLA",
-    start='2022-02-25 09:30:00 -0400',
-    end='2022-03-01 09:35:00 -0400',
-    interval='1m'
-)
-price = yf_data.get()
-```
+
 
 ## Supported Metric
 
