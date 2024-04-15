@@ -56,7 +56,7 @@ class TA_Features:
         'accbands': ta.accbands, 'amat': ta.amat, 'aobv': ta.aobv,
         'cg': ta.cg, 'coppock': ta.coppock, 'decreasing': ta.decreasing,
         'donchian': ta.donchian, 'efi': ta.efi, 'eom': ta.eom, 'fwma': ta.fwma,
-        'ichimoku': ta.ichimoku, 'increasing': ta.increasing, 'kc': ta.kc,
+        'increasing': ta.increasing, 'kc': ta.kc,
         'kst': ta.kst, 'kurtosis': ta.kurtosis, 'linear_decay': ta.decay,
         'log_return': ta.log_return, 'mad': ta.mad, 'median': ta.median,
         'midpoint': ta.midpoint, 'midprice': ta.midprice,
@@ -64,7 +64,7 @@ class TA_Features:
         'pwma': ta.pwma, 'quantile': ta.quantile, 'rma': ta.rma, 'rvi': ta.rvi,
         'sinwma': ta.sinwma, 'skew': ta.skew, 'slope': ta.slope, 'swma': ta.swma,
         't3': ta.t3, 'tsi': ta.tsi, 'uo': ta.uo, 'variance': ta.variance,
-        'vortex': ta.vortex, 'vp': ta.vp, 'vwap': ta.vwap, 'zscore': ta.zscore
+        'vortex': ta.vortex, 'zscore': ta.zscore
     }
     pandas_ta_indicators = {
         'accbands': ta.accbands, 'ad': ta.ad, 'adosc': ta.adosc, 'adx': ta.adx,
@@ -78,15 +78,15 @@ class TA_Features:
         'kc': ta.kc, 'kst': ta.kst, 'kurtosis': ta.kurtosis,
         'log_return': ta.log_return, 'mad': ta.mad, 'massi': ta.massi, 'median': ta.median,
         'midpoint': ta.midpoint, 'midprice': ta.midprice,
-        'mom': ta.mom, 'natr': ta.natr,  'obv': ta.obv, 'ppo': ta.ppo,
+        'mom': ta.mom, 'natr': ta.natr, 'obv': ta.obv, 'ppo': ta.ppo,
         'pvol': ta.pvol, 'pvt': ta.pvt, 'pwma': ta.pwma, 'qstick': ta.qstick,
         'quantile': ta.quantile, 'rma': ta.rma, 'roc': ta.roc, 'rsi': ta.rsi,
         'rvi': ta.rvi, 'sinwma': ta.sinwma, 'skew': ta.skew, 'slope': ta.slope,
-        'sma': ta.sma, 'stdev': ta.stdev,  'swma': ta.swma,
+        'sma': ta.sma, 'stdev': ta.stdev, 'swma': ta.swma,
         't3': ta.t3, 'tema': ta.tema, 'trima': ta.trima, 'trix': ta.trix,
         'true_range': ta.true_range, 'tsi': ta.tsi, 'uo': ta.uo,
         'variance': ta.variance, 'vortex': ta.vortex,
-         'vwma': ta.vwma, 'willr': ta.willr, 'wma': ta.wma,
+        'vwma': ta.vwma, 'willr': ta.willr, 'wma': ta.wma,
         'zlma': ta.zlma, 'zscore': ta.zscore
     }
     unique_pantulipy_indicators = {
@@ -97,7 +97,7 @@ class TA_Features:
         'linregslope': linregslope, 'marketfi': marketfi,
         'md': md, 'msw': msw, 'psar': psar, 'rocr': rocr, 'stderr': stderr,
         'tr': tr, 'tsf': tsf, 'typprice': typprice, 'vhf': vhf,
-        'vidya': vidya, 'volatility': volatility, 'vosc': vosc, 'wad': wad,
+        'vidya': vidya, 'volatility': volatility,  'wad': wad,
         'wcprice': wcprice
     }
     pantulipy_indicators = {
@@ -115,7 +115,7 @@ class TA_Features:
         'roc': roc, 'rocr': rocr, 'rsi': rsi, 'sma': sma, 'stderr': stderr,
         'stoch': stoch, 'tema': tema, 'tr': tr, 'trima': trima, 'trix': trix,
         'tsf': tsf, 'typprice': typprice, 'ultosc': ultosc, 'vhf': vhf,
-        'vidya': vidya, 'volatility': volatility, 'vosc': vosc, 'vwma': vwma,
+        'vidya': vidya, 'volatility': volatility, 'vwma': vwma,
         'wad': wad, 'wcprice': wcprice, 'wilders': wilders, 'willr': willr,
         'wma': wma, 'zlema': zlema
     }
@@ -180,6 +180,12 @@ class TA_Features:
             :param: data - DataFrame with columns: 'open' 'high' 'low' 'close' 'volume'
             :param: unique - True would exclude all indicators that Pandas_TA has also
         """
+        data.columns = map(str.lower, data.columns)
+        data['open'] = pd.to_numeric(data['open'], errors='coerce')
+        data['high'] = pd.to_numeric(data['high'], errors='coerce')
+        data['low'] = pd.to_numeric(data['low'], errors='coerce')
+        data['close'] = pd.to_numeric(data['close'], errors='coerce')
+        data['volume'] = pd.to_numeric(data['volume'], errors='coerce')
         ind = self.unique_pantulipy_indicators if unique else self.pantulipy_indicators
         for name, function in ind.items():
             if name not in _DEFAULTLESS_INDICATORS:
