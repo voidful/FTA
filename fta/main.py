@@ -169,7 +169,7 @@ class TA_Features:
                                           volume=volume)
             if type(indicator_data) == tuple:  # tuple of dataframes
                 for i in range(0, len(indicator_data)):
-                    data = self._append_column(data, indicator_data[i])
+                    data = self._append_column(data, indicator_data.iloc[i])
             else:
                 data = self._append_column(data, indicator_data)
         return self._remove_duplicate_columns(data)
