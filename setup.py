@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='fta',
-    version='0.0.8',
+    version='0.0.9',
     description='',
     url='https://github.com/voidful/FTA',
     author='Voidful',
