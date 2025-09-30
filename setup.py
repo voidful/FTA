@@ -5,7 +5,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='fta',
-    version='0.0.9',
+    version='0.0.13',
     description='',
     url='https://github.com/voidful/FTA',
     author='Voidful',
@@ -18,7 +18,7 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python"
     ],
-    license="Apache",
+    license_files="Apache",
     keywords='finance',
     packages=find_packages(),
     install_requires=required,
