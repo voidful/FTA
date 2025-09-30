@@ -98,7 +98,9 @@ price = ccxt_data.get()
 
 ## Supported Metric
 
-### **Momentum** 
+FTA now auto-discovers indicators that ship with [`pandas_ta`](https://github.com/twopirllc/pandas-ta) and the bundled Tulip wrappers. This means new studies released upstream are immediately available without requiring a library upgrade, including additional candlestick, cycle, performance, statistics, trend, volatility, and volume studies such as **alligator**, **heiken ashi**, **supertrend**, **entropy**, **zigzag**, **vwap**, and more.
+
+### **Momentum**
 * _Awesome Oscillator_: **ao**
 * _Absolute Price Oscillator_: **apo**
 * _Balance of Power_: **bop**
@@ -196,6 +198,29 @@ price = ccxt_data.get()
 ### **Math**
 * _Mean Deviation Over Period_: **md**
 * _Standard Error Over Period_: **stderr**
+
+<br/>
+
+### **Cycle**
+* _Even Better Sine Wave_: **ebsw**
+* _Reflex_: **reflex**
+
+<br/>
+
+### **Performance**
+* _Log Return_: **log_return**
+* _Percent Return_: **percent_return**
+
+<br/>
+
+### **Statistics**
+* _Entropy_: **entropy**
+* _Kurtosis_: **kurtosis**
+* _Median_: **median**
+* _Quantile_: **quantile**
+* _Skew_: **skew**
+* _Variance_: **variance**
+* _Z-Score_: **zscore**
 
 <br/>
 
