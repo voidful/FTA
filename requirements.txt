@@ -1,19 +1,35 @@
-numpy==1.23.5
-numba==0.56.4
-llvmlite==0.39.1
+# ========== Core scientific stack ==========
+# Legacy stack for Python < 3.12
+numpy==1.23.5; python_version < "3.12"
+numba==0.56.4; python_version < "3.12"
+llvmlite==0.39.1; python_version < "3.12"
 
-pandas==1.5.3
-scipy==1.10.1
-scikit-learn==1.3.2
-matplotlib==3.7.5
+pandas==1.5.3; python_version < "3.12"
+scipy==1.10.1; python_version < "3.12"
+scikit-learn==1.3.2; python_version < "3.12"
+matplotlib==3.7.5; python_version < "3.12"
+
+# Modern stack for Python >= 3.12 (incl. 3.13)
+numpy>=2.1; python_version >= "3.12"
+numba>=0.61,<0.62; python_version >= "3.12"
+llvmlite>=0.44,<0.45; python_version >= "3.12"
+pandas>=2.2.3; python_version >= "3.12"
+scipy>=1.14.1; python_version >= "3.12"
+scikit-learn>=1.6; python_version >= "3.12"
+matplotlib>=3.10; python_version >= "3.12"
+
 imageio==2.37.0
-
-twstock==1.4.0
-vectorbt==0.28.1
-yfinance==0.2.66
-lxml==4.9.4
 requests==2.32.5
 jinja2==3.1.6
 nlp2==1.9.4
 
-pandas_ta==0.3.14b0
+# ========== Trading & market data ==========
+twstock==1.4.0
+yfinance==0.2.66
+
+vectorbt==0.28.1; python_version < "3.12"
+
+lxml==4.9.4; python_version < "3.12"
+lxml>=5.3; python_version >= "3.12"
+pandas_ta==0.3.14b0; python_version < "3.12"
+pandas-ta-openbb>=0.4.22; python_version >= "3.12"
